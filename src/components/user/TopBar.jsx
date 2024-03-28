@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
-function TopBar() {
+function TopBar({ token, handleLogOut }) {
   return (
     <>
       <>
@@ -33,12 +34,24 @@ function TopBar() {
                       <i className="fa fa-user" aria-hidden="true" />
                       My Account
                       <ul className="onhover-show-div">
-                        <li>
-                          <a href="/login">Login</a>
-                        </li>
-                        <li>
-                          <a href="register.html">register</a>
-                        </li>
+                        {token === null ? (
+                          <>
+                            <li>
+                              <a href="/login">Login</a>
+                            </li>
+                            <li>
+                              <a href="register.html">register</a>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li>
+                              <button onClick={() => handleLogOut()}>
+                                LogOut
+                              </button>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </li>
                   </ul>
